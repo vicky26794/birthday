@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Birthday Wishes - Friends Theme</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg-start: #0f1021;
+      --bg-end: #1f2a44;
+      --card-bg: rgba(255, 255, 255, 0.14);
+      --card-border: rgba(255, 255, 255, 0.28);
+      --accent: #ff4d8d;
+      --accent-soft: #ffd2e4;
+      --text-main: #f7f8ff;
+      --text-soft: #d6daf5;
+      --glow: 0 0 30px rgba(255, 77, 141, 0.25);
+      --frame-shadow: 0 20px 45px rgba(7, 10, 26, 0.4);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Poppins", sans-serif;
+      background: url("C:/Users/VigneshRaghavan/.cursor/projects/e-Birthday/assets/c__Users_VigneshRaghavan_AppData_Roaming_Cursor_User_workspaceStorage_f7a8dd332a7baa92b2cbe7125d26ea36_images_image-5e608176-9c2a-492f-9cf6-257a574121a7.png") center / cover no-repeat fixed;
+      color: var(--text-main);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: grid;
+      place-items: center;
+      padding: 1rem;
+      position: relative;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(7, 10, 26, 0.48), rgba(10, 14, 35, 0.62));
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .sparkles {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 1;
+      overflow: hidden;
+    }
+
+    .sparkles span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.6);
+      animation: floatUp linear infinite;
+      filter: blur(0.3px);
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(100vh) scale(0.6);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.9;
+      }
+      to {
+        transform: translateY(-10vh) scale(1.2);
+        opacity: 0;
+      }
+    }
+
+    .birthday-wrapper {
+      width: min(980px, 100%);
+      position: relative;
+      z-index: 2;
+      border-radius: 24px;
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.08));
+      border: 1px solid var(--card-border);
+      box-shadow: var(--frame-shadow);
+      backdrop-filter: blur(16px);
+      overflow: hidden;
+      animation: fadeInUp 900ms ease-out;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(36px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .frame-top {
+      height: 10px;
+      background: linear-gradient(90deg, #ff8eb7, #ffd166, #7dd3fc, #b794f4, #ff8eb7);
+      background-size: 220% 100%;
+      animation: frameFlow 6s linear infinite;
+    }
+
+    @keyframes frameFlow {
+      from { background-position: 0 0; }
+      to { background-position: 220% 0; }
+    }
+
+    .content {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 1.4rem;
+      padding: 1.5rem;
+    }
+
+    .left-panel {
+      padding: 0.7rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.06));
+      box-shadow: var(--glow);
+    }
+
+    .slider {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      margin: 0;
+      opacity: 0;
+      transform: scale(1.05);
+      transition: opacity 1.2s ease, transform 1.2s ease;
+    }
+
+    .slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      filter: saturate(1.1) contrast(1.05);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: scale(1);
+      z-index: 2;
+    }
+
+    .slide.active.fx-zoom-in img {
+      animation: fxZoomIn 3.8s ease-out both;
+    }
+
+    .slide.active.fx-pan-left img {
+      animation: fxPanLeft 3.8s ease-out both;
+    }
+
+    .slide.active.fx-pan-up img {
+      animation: fxPanUp 3.8s ease-out both;
+    }
+
+    .slide.active.fx-soft-rotate img {
+      animation: fxSoftRotate 3.8s ease-out both;
+    }
+
+    .slide.active.fx-zoom-out img {
+      animation: fxZoomOut 3.8s ease-out both;
+    }
+
+    @keyframes fxZoomIn {
+      from { transform: scale(1.16); }
+      to { transform: scale(1); }
+    }
+
+    @keyframes fxPanLeft {
+      from { transform: scale(1.14) translateX(2.5%); }
+      to { transform: scale(1.02) translateX(-2.5%); }
+    }
+
+    @keyframes fxPanUp {
+      from { transform: scale(1.14) translateY(2.5%); }
+      to { transform: scale(1.02) translateY(-2.5%); }
+    }
+
+    @keyframes fxSoftRotate {
+      from { transform: scale(1.12) rotate(-1.1deg); }
+      to { transform: scale(1) rotate(1.1deg); }
+    }
+
+    @keyframes fxZoomOut {
+      from { transform: scale(1); }
+      to { transform: scale(1.14); }
+    }
+
+    .slider-caption {
+      margin-top: 0.8rem;
+      text-align: center;
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      letter-spacing: 0.2px;
+    }
+
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0.95rem;
+      padding: 1.2rem;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.05));
+    }
+
+    .tag {
+      display: inline-flex;
+      width: fit-content;
+      padding: 0.35rem 0.72rem;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      background: rgba(255, 77, 141, 0.16);
+      border: 1px solid rgba(255, 77, 141, 0.5);
+      color: var(--accent-soft);
+    }
+
+    h1 {
+      font-family: "Great Vibes", cursive;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      font-weight: 400;
+      line-height: 1.05;
+      text-shadow: 0 0 18px rgba(255, 172, 206, 0.28);
+    }
+
+    .friend-highlight {
+      color: #ffd4e5;
+      font-weight: 600;
+      font-family: "Poppins", sans-serif;
+      font-size: clamp(1.25rem, 3vw, 1.65rem);
+      margin-top: 0.2rem;
+      display: block;
+    }
+
+    .message {
+      color: var(--text-soft);
+      line-height: 1.72;
+      font-size: 0.98rem;
+    }
+
+    .launch-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 30;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle, rgba(13, 20, 44, 0.55), rgba(7, 10, 22, 0.92));
+      backdrop-filter: blur(3px);
+      transition: opacity 0.8s ease, visibility 0.8s ease;
+    }
+
+    .launch-overlay.hidden {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    .open-site-btn {
+      position: relative;
+      border: none;
+      padding: 0;
+      background: transparent;
+      cursor: pointer;
+      line-height: 0;
+      animation: launchPulse 1.7s ease-in-out infinite;
+      transition: transform 0.2s ease;
+    }
+
+    .open-site-btn img {
+      display: block;
+      width: auto;
+      height: auto;
+      max-width: min(38vw, 210px);
+      border-radius: 0;
+      box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+    }
+
+    .open-site-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .open-site-btn:active {
+      transform: scale(0.98);
+    }
+
+    .open-site-btn.opening {
+      animation: btnBurst 900ms cubic-bezier(.3,1.2,.4,1) forwards;
+    }
+
+    .launch-note {
+      margin-top: 0.9rem;
+      text-align: center;
+      color: #f0e6ff;
+      opacity: 0.92;
+      font-size: 0.9rem;
+    }
+
+    .burst-layer {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .burst-dot {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      opacity: 0;
+      animation: burstMove 900ms ease-out forwards;
+    }
+
+    @keyframes launchPulse {
+      0%, 100% { box-shadow: 0 12px 25px rgba(255, 61, 119, 0.33); }
+      50% { box-shadow: 0 14px 38px rgba(255, 61, 119, 0.58); }
+    }
+
+    @keyframes btnBurst {
+      0% { transform: scale(1); }
+      45% { transform: scale(1.12); }
+      100% { transform: scale(0.92); opacity: 0; }
+    }
+
+    @keyframes burstMove {
+      0% {
+        transform: translate(0, 0) scale(0.4);
+        opacity: 1;
+      }
+      100% {
+        transform: translate(var(--tx), var(--ty)) scale(1.15);
+        opacity: 0;
+      }
+    }
+
+    .footer-note {
+      margin-top: 0.3rem;
+      font-size: 0.82rem;
+      color: rgba(236, 239, 255, 0.78);
+    }
+
+    .pulse-ring {
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      right: -45px;
+      bottom: -50px;
+      animation: pulse 3.4s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.4; }
+      50% { transform: scale(1.14); opacity: 0.15; }
+    }
+
+    @media (max-width: 860px) {
+      .content {
+        grid-template-columns: 1fr;
+      }
+      .right-panel {
+        padding-top: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      body { padding: 0.7rem; }
+      .content { padding: 1rem; gap: 1rem; }
+      .right-panel, .left-panel { border-radius: 14px; }
+      .slider { border-radius: 10px; }
+      .message { font-size: 0.93rem; }
+      .open-site-btn img { max-width: min(64vw, 180px); }
+    }
+  </style>
+</head>
+<body>
+  <div class="sparkles" id="sparkles" aria-hidden="true"></div>
+  <div class="launch-overlay" id="launchOverlay">
+    <div>
+      <button class="open-site-btn" id="openSiteBtn" type="button" data-target-url="">
+        <img src="gift_transparent.png" alt="Open birthday surprise">
+      </button>
+      <p align="center" class="launch-note">Click to see the opening</p>
+    </div>
+    <div class="burst-layer" id="burstLayer"></div>
+  </div>
+
+  <main class="birthday-wrapper">
+    <div class="frame-top"></div>
+    <section class="content">
+      <div class="left-panel">
+        <div class="slider" aria-label="Birthday photo memories slider">
+          <figure class="slide active">
+            <img src="https://images.unsplash.com/photo-1464349153735-7db50ed83c84?auto=format&fit=crop&w=1200&q=80" alt="Birthday cake celebration" />
+          </figure>
+          <figure class="slide">
+            <img src="img/img.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <figure class="slide">
+            <img src="img/img2.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <figure class="slide">
+            <img src="img/img3.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <figure class="slide">
+            <img src="img/img4.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <figure class="slide fx-zoom-in">
+            <img src="img/img5.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <!--<figure class="slide fx-pan-left">
+            <img src="img/img6.jpeg" alt="Birthday cake celebration" />
+          </figure>-->
+          <figure class="slide">
+            <img src="img/img7.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <figure class="slide fx-pan-up">
+            <img src="img/img8.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <!--<figure class="slide fx-soft-rotate">
+            <img src="img/img9.jpeg" alt="Birthday cake celebration" />
+          </figure>-->
+          <figure class="slide fx-zoom-out">
+            <img src="img/img10.jpeg" alt="Birthday cake celebration" />
+          </figure>
+          <!--<figure class="slide">
+            <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1200&q=80" alt="Friends celebrating with balloons" />
+          </figure>
+          <figure class="slide">
+            <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?auto=format&fit=crop&w=1200&q=80" alt="Colorful birthday party lights" />
+          </figure>-->
+        </div>
+        <p class="slider-caption">Moments of laughter, loyalty, and lifelong friendship.</p>
+      </div>
+
+      <div class="right-panel">
+        <span class="tag">Happy Birthday</span>
+        <h1>Wishing You a Beautiful Birthday
+          <span class="friend-highlight">To my incredible best friend</span>
+        </h1>
+        <p class="message">
+          On your special day, I celebrate your kindness, your strength, and the joy you bring into every life around you.
+          May this year reward you with success, peace, adventure, and endless reasons to smile. You deserve a future as
+          bright as your heart and as inspiring as your friendship.
+        </p>
+
+        <p class="footer-note">Share this wish card with friends and family for a memorable birthday greeting.</p>
+      </div>
+    </section>
+    <div class="pulse-ring"></div>
+  </main>
+
+  <audio id="birthdayAudio" loop preload="auto" autoplay muted playsinline>
+    <source src="birthday.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    const slides = document.querySelectorAll(".slide");
+    let currentSlide = 0;
+
+    function showSlide(index) {
+      slides.forEach((slide, i) => {
+        slide.classList.toggle("active", i === index);
+      });
+    }
+
+    function nextSlide() {
+      currentSlide = (currentSlide + 1) % slides.length;
+      showSlide(currentSlide);
+    }
+
+    setInterval(nextSlide, 3800);
+
+    const audio = document.getElementById("birthdayAudio");
+    const launchOverlay = document.getElementById("launchOverlay");
+    const openSiteBtn = document.getElementById("openSiteBtn");
+    const burstLayer = document.getElementById("burstLayer");
+    const launchStorageKey = "birthday-launch-complete";
+    const TARGET_URL = (openSiteBtn.dataset.targetUrl || "").trim();
+
+    async function tryAutoplayAudio() {
+      try {
+        // Muted autoplay is the most compatible on reload.
+        audio.muted = true;
+        await audio.play();
+        return true;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function enableSoundOnFirstInteraction() {
+      const unmuteHandler = () => {
+        if (!audio.paused) {
+          audio.muted = false;
+        }
+      };
+      ["pointerdown", "touchstart", "keydown"].forEach((eventName) => {
+        document.addEventListener(eventName, unmuteHandler, { once: true });
+      });
+    }
+
+    document.addEventListener("DOMContentLoaded", async () => {
+      const started = await tryAutoplayAudio();
+      if (started) {
+        enableSoundOnFirstInteraction();
+      }
+    });
+
+    function createBurstEffect() {
+      const colors = ["#ff5f98", "#ffd166", "#7dd3fc", "#b794f4", "#ff8eb7", "#ffe27a"];
+      const centerX = window.innerWidth / 2;
+      const centerY = window.innerHeight / 2;
+      for (let i = 0; i < 28; i++) {
+        const dot = document.createElement("span");
+        dot.className = "burst-dot";
+        dot.style.left = centerX + "px";
+        dot.style.top = centerY + "px";
+        dot.style.background = colors[i % colors.length];
+        const angle = (Math.PI * 2 * i) / 28;
+        const distance = 120 + Math.random() * 140;
+        dot.style.setProperty("--tx", Math.cos(angle) * distance + "px");
+        dot.style.setProperty("--ty", Math.sin(angle) * distance + "px");
+        burstLayer.appendChild(dot);
+        setTimeout(() => dot.remove(), 1000);
+      }
+    }
+
+    function isValidRedirectUrl(url) {
+      if (!url) return false;
+      try {
+        const parsed = new URL(url, window.location.href);
+        // Avoid redirecting back to the exact same page.
+        return parsed.href !== window.location.href;
+      } catch (error) {
+        return false;
+      }
+    }
+
+    function completeLaunchWithoutRedirect() {
+      launchOverlay.classList.add("hidden");
+      sessionStorage.setItem(launchStorageKey, "1");
+    }
+
+    async function forcePlayWithSound() {
+      try {
+        audio.muted = false;
+        await audio.play();
+      } catch (error) {
+        // Some browsers may require a second attempt after visual transition.
+      }
+    }
+
+    if (sessionStorage.getItem(launchStorageKey) === "1") {
+      launchOverlay.classList.add("hidden");
+    }
+
+    openSiteBtn.addEventListener("click", async () => {
+      await forcePlayWithSound();
+      openSiteBtn.classList.add("opening");
+      createBurstEffect();
+      setTimeout(() => {
+        launchOverlay.classList.add("hidden");
+      }, 520);
+      setTimeout(() => {
+        forcePlayWithSound();
+        if (isValidRedirectUrl(TARGET_URL)) {
+          window.location.href = TARGET_URL;
+          return;
+        }
+        completeLaunchWithoutRedirect();
+      }, 1050);
+    });
+
+    // Decorative sparkle generator for subtle floating particles.
+    const sparklesContainer = document.getElementById("sparkles");
+    for (let i = 0; i < 30; i++) {
+      const sparkle = document.createElement("span");
+      sparkle.style.left = Math.random() * 100 + "vw";
+      sparkle.style.animationDuration = 6 + Math.random() * 6 + "s";
+      sparkle.style.animationDelay = Math.random() * 8 + "s";
+      sparkle.style.opacity = (0.3 + Math.random() * 0.6).toString();
+      sparkle.style.transform = `scale(${0.6 + Math.random() * 0.9})`;
+      sparklesContainer.appendChild(sparkle);
+    }
+  </script>
+</body>
+</html>
